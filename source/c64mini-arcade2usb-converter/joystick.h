@@ -23,9 +23,14 @@
 class Joystick_
 {
 private:
-  uint16_t _buttons = 0x0;
-  uint8_t _x_axis = 0x7F;
-  uint8_t _y_axis = 0x7F;
+  uint16_t _p1_buttons = 0x0;
+  uint16_t _p2_buttons = 0x0;
+  
+  uint8_t _p1_x_axis = 0x7F;
+  uint8_t _p1_y_axis = 0x7F;
+  
+  uint8_t _p2_x_axis = 0x7F;
+  uint8_t _p2_y_axis = 0x7F;
   
 public:
   
@@ -33,11 +38,20 @@ public:
 
   void buttons(uint16_t b);
   void reset(void);
-  void up();
-  void right();
-  void down();
-  void left();
-  void button_press(uint16_t b);
+ 
+  void p1_up();
+  void p1_right();
+  void p1_down();
+  void p1_left();
+  void p1_button_press(uint16_t b);
+  
+  void p2_up();
+  void p2_right();
+  void p2_down();
+  void p2_left();
+  void p2_button_press(uint16_t b);
+
+  
   void usb_update(); 
 };
 extern Joystick_ Joystick;

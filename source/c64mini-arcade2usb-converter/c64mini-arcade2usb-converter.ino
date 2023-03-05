@@ -25,6 +25,12 @@ const int pin_joystick_button_a = 8;
 const int pin_joystick_button_b = 9;
 const int pin_joystick_button_c = 10;
 
+const int pin_joystick2_up = 18;
+const int pin_joystick2_down = 19;
+const int pin_joystick2_left = 20;
+const int pin_joystick2_right = 21;
+const int pin_joystick2_button1 = 15;
+
 
 int debounceDelay = 1; // debounce delay
 
@@ -39,7 +45,13 @@ void setup() {
   pinMode(pin_joystick_button_menu, INPUT_PULLUP);       
   pinMode(pin_joystick_button_a, INPUT_PULLUP);       
   pinMode(pin_joystick_button_b, INPUT_PULLUP);       
-  pinMode(pin_joystick_button_c, INPUT_PULLUP);       
+  pinMode(pin_joystick_button_c, INPUT_PULLUP); 
+
+  pinMode(pin_joystick2_up, INPUT_PULLUP);       
+  pinMode(pin_joystick2_down, INPUT_PULLUP);       
+  pinMode(pin_joystick2_left, INPUT_PULLUP);       
+  pinMode(pin_joystick2_right, INPUT_PULLUP);       
+  pinMode(pin_joystick2_button1, INPUT_PULLUP);  
 }
 
 void loop() {
@@ -47,12 +59,7 @@ void loop() {
   // Reset values for next loop..  
   Joystick.reset();
   
-  // Button - Fire (1)
-  if (digitalRead(pin_joystick_button1) == LOW) {
-    
-    Joystick.button_press(0x40); 
-    // see documentation to use other device
-  }
+
   
   // Button - Menu
   if (digitalRead(pin_joystick_button_menu) == LOW) {
@@ -82,6 +89,28 @@ void loop() {
     // see documentation to use other device
   }
 
+
+  // Button - Fire (1)
+  if (digitalRead(pin_joystick_button1) == LOW) {
+    
+    Joystick.button_press(0x40); 
+    // see documentation to use other device
+  }
+
+	inputPlayer1();
+	inputPlayer2();
+  
+  // update joystick actions
+  Joystick.usb_update();
+  
+  delay(debounceDelay);
+}
+
+
+
+void inputPlayer1(){
+	
+	
   // Button - Up
   if (digitalRead(pin_joystick_up) == LOW) {
     
@@ -104,9 +133,35 @@ void loop() {
 
     Joystick.left();
   }
+	
+	
+}
+
+
+void inputPlayer2(){
+		
+  // Button - Up
+  if (digitalRead(pin_joystick_up) == LOW) {
+    
+    Joystick.up();  
+  }
   
-  // update joystick actions
-  Joystick.usb_update();
+  // Button - Right
+  if (digitalRead(pin_joystick_right) == LOW) {
+    Joystick.right();
+  }
   
-  delay(debounceDelay);
+  // Button - Down
+  if (digitalRead(pin_joystick_down) == LOW) {
+    
+    Joystick.down();
+  }
+  
+  // Button - Left
+  if (digitalRead(pin_joystick_left) == LOW) {
+
+    Joystick.left();
+  }
+	
+	
 }
